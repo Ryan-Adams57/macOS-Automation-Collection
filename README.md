@@ -14,12 +14,12 @@ tell application – Control macOS apps
 
 # System & Network Administration
 
-Restart / Shut Down Computer
+Restart / Shut Down Computer:
 
 tell application "System Events" to restart
 tell application "System Events" to shut down
 
-Display System Information
+Display System Information:
 
 system info
 
@@ -31,47 +31,47 @@ IP address
 
 macOS version
 
-Mount Network Drive
+Mount Network Drive:
 
 mount volume "smb://servername/sharename"
 
-Flush DNS Cache
+Flush DNS Cache:
 
 do shell script "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder" with administrator privileges
 
-Get Public IP Address
+Get Public IP Address:
 
 do shell script "curl ifconfig.me"
 
 # File & User Management
 
-Move File to Trash
+Move File to Trash:
 
 tell application "Finder" to move (POSIX file "/path/to/file") to trash
 
-Create Folder
+Create Folder:
 
 do shell script "mkdir -p /Users/username/Desktop/NewFolder"
 
-Read / Write Text File
+Read / Write Text File:
 
 write "Log entry" to (open for access (path to desktop as text) & "log.txt" as file) starting at eof
 
-Change File Permissions
+Change File Permissions:
 
 do shell script "chmod 755 /path/to/file"
 
 # UI Automation & Notifications
 
-Display Notification
+Display Notification:
 
 display notification "Backup Complete" with title "IT Alert" subtitle "Backup Status"
 
-Interactive Dialog
+Interactive Dialog:
 
 display dialog "Update required. Restart now?" buttons {"Later", "Restart"} default button "Restart"
 
-Open Application at Login
+Open Application at Login:
 
 tell application "System Events" to make login item at end with properties {path:"/Applications/AppName.app", hidden:false}
 
