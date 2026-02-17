@@ -1,0 +1,40 @@
+-- Create a new folder next to the selected items in Finder
+tell application "Finder"
+    set selItems to selection
+    if selItems is {} then
+        display dialog "No items selected." buttons {"OK"} default button "OK"
+        return
+    end if
+
+    -- Use the parent of the first selected item
+    set parentFolder to container of item 1 of selItems
+
+    -- Ask for the new folder name
+    set folderName to text returned of (display dialog "New folder name:" default answer "New Folder")
+
+    -- Create the folder
+    make new folder at parentFolder with properties {name:folderName}
+end tell
+
+
+-- Create a new folder inside the selected folder
+tell application "Finder"
+    set selItems to selection
+    if selItems is {} then
+        display dialog "No folder selected." buttons {"OK"} default button "OK"
+        return
+    end if
+
+    -- Make sure the first selected item is a folder
+    set targetFolder to item 1 of selItems
+    if class of targetFolder is not folder then
+        display dialog "Please select a folder." buttons {"OK"} default button "OK"
+        return
+    end if
+
+    -- Ask for the new folder name
+    set folderName to text returned of (display dialog "New folder name:" default answer "New Folder")
+
+    -- Create the folder inside the selected folder
+    make new folder at targetFolder with properties {name:folderName}
+end tell

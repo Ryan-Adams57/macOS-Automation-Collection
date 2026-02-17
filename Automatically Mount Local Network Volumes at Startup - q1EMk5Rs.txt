@@ -1,0 +1,9 @@
+tell application "Finder"
+    try
+	    mount volume "protocol://nameofvolume/nameoffolder1"
+	    mount volume "protocol://nameofvolume/nameoffolder2"
+	    mount volume "protocol://nameofvolume/nameoffolder3"
+    on error number n
+	    display alert ("Error " & n & " on network share mount")
+    end try
+end tell
