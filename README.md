@@ -36,6 +36,6 @@ Copy the desired code block.
 
 Save as a .scpt or .app for easy access.
 
-[!IMPORTANT]
+# IMPORTANT
 
 Some scripts may require Accessibility or Full Disk Access permissions under System Settings > Privacy & Security.
