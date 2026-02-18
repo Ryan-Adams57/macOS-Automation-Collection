@@ -1,0 +1,65 @@
+-- Start Workday Script
+
+-- List of work apps to launch
+set workApps to {"Slack", "Arc", "Calendar", "Mail", "Notion", "Zoom"}
+
+-- List of non-work apps to quit
+set personalApps to {"Spotify", "Messages", "Photos", "iTunes", "YouTube Music"} -- adjust as needed
+
+-- Quit personal/non-work apps
+repeat with appName in personalApps
+    tell application appName
+        if it is running then quit
+    end tell
+end repeat
+
+-- Launch work apps
+repeat with appName in workApps
+    tell application appName
+        if it is not running then launch
+    end tell
+end repeat
+
+-- Give apps a moment to start
+delay 3
+
+-- Load Moom window layout via AppleScript (Moom must support this)
+tell application "Moom"
+    -- Replace "WorkLayout" with the name of your saved layout
+    load layout "WorkLayout"
+end tell
+
+-- Switch Arc to work workspace using keyboard shortcut
+tell application "System Events"
+    -- Replace {command down, shift down, "1"} with your Arc work workspace shortcut
+    keystroke "1" using {command down, shift down}
+end tell
+
+
+-- End Workday Script
+
+-- List of work apps to quit
+set workApps to {"Slack", "Arc", "Calendar", "Mail", "Notion", "Zoom"}
+
+-- List of personal apps to launch after work
+set personalApps to {"Spotify", "Messages", "Mail"} -- adjust as needed
+
+-- Quit work apps
+repeat with appName in workApps
+    tell application appName
+        if it is running then quit
+    end tell
+end repeat
+
+-- Launch personal apps
+repeat with appName in personalApps
+    tell application appName
+        if it is not running then launch
+    end tell
+end repeat
+
+-- Switch Arc to personal workspace using keyboard shortcut
+tell application "System Events"
+    -- Replace {command down, shift down, "2"} with your Arc personal workspace shortcut
+    keystroke "2" using {command down, shift down}
+end tell

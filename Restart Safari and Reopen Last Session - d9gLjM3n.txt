@@ -1,0 +1,34 @@
+-- Restart Safari and restore previous session
+
+tell application "Safari"
+    -- Get current open windows and tabs for backup (optional)
+    set windowBackup to {}
+    repeat with w in windows
+        set tabURLs to {}
+        repeat with t in tabs of w
+            set end of tabURLs to URL of t
+        end repeat
+        set end of windowBackup to tabURLs
+    end repeat
+end tell
+
+-- Quit Safari
+tell application "Safari" to quit
+
+-- Wait a moment for memory to clear
+delay 2
+
+-- Relaunch Safari
+tell application "Safari"
+    activate
+
+    -- Reopen previous session tabs (manual restore)
+    repeat with tabList in windowBackup
+        set newWin to make new document
+        repeat with tabURL in tabList
+            tell newWin
+                make new tab with properties {URL:tabURL}
+            end tell
+        end repeat
+    end repeat
+end tell

@@ -1,0 +1,31 @@
+-- Shrinkage AppleScript
+-- Drag and drop images onto this app to scale them to 20%
+
+on open droppedFiles
+    tell application "Preview"
+        activate
+        repeat with aFile in droppedFiles
+            -- Open the image
+            open aFile
+            
+            -- Get the document reference
+            set docRef to front document
+            
+            -- Get the current dimensions
+            tell docRef
+                set {w, h} to {width, height}
+                
+                -- Calculate 20% dimensions
+                set newWidth to w * 0.2
+                set newHeight to h * 0.2
+                
+                -- Scale the image
+                scale newWidth newHeight
+                
+                -- Save over the original
+                save docRef in aFile
+                close docRef
+            end tell
+        end repeat
+    end tell
+end open
